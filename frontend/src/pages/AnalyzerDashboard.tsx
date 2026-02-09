@@ -136,6 +136,30 @@ export function AnalyzerDashboard() {
         { name: 'Content', value: agg?.module_scores?.content ?? content?.score ?? 0 },
     ];
 
+    // Key metrics preview per module (shown as chips inside each card)
+    const modulePreviewData: Record<string, { label: string; value: string }[]> = {
+        Performance: [
+            { label: 'LCP', value: perf?.metrics?.lcp_s != null ? `${Number(perf.metrics.lcp_s).toFixed(2)}s` : '—' },
+            { label: 'CLS', value: perf?.metrics?.cls != null ? Number(perf.metrics.cls).toFixed(3) : '—' },
+            { label: 'JS', value: perf?.metrics?.total_js_kb != null ? `${Math.round(perf.metrics.total_js_kb)} KB` : '—' },
+        ],
+        SEO: [
+            { label: 'Title', value: seo?.title_length != null ? `${seo.title_length} ch` : '—' },
+            { label: 'H1s', value: seo?.h1_count != null ? `${seo.h1_count}` : '—' },
+            { label: 'No-alt', value: seo?.images_missing_alt_count != null ? `${seo.images_missing_alt_count}` : '—' },
+        ],
+        UX: [
+            { label: 'Violations', value: ux?.violations_count != null ? `${ux.violations_count}` : '—' },
+            { label: 'CTAs', value: ux?.ctas_count != null ? `${ux.ctas_count}` : '—' },
+            { label: 'Viewport', value: ux?.viewport_meta_present != null ? (ux.viewport_meta_present ? '✓' : '✗') : '—' },
+        ],
+        Content: [
+            { label: 'Words', value: content?.word_count != null ? `${content.word_count}` : '—' },
+            { label: 'Flesch', value: content?.flesch_reading_ease != null ? `${Number(content.flesch_reading_ease).toFixed(0)}` : '—' },
+            { label: 'Keywords', value: content?.keywords?.length != null ? `${content.keywords.length}` : '—' },
+        ],
+    };
+
     // Collect all issues from all modules
     const allIssues = [
         ...(perf?.issues || []).map((i: any) => ({ ...i, module: 'Performance' })),
@@ -250,6 +274,15 @@ export function AnalyzerDashboard() {
                                         <div className="module-progress-fill" style={{ width: `${module.value}%`, backgroundColor: modColor }} />
                                     </div>
                                     <span className="module-progress-num" style={{ color: modColor }}>{module.value}</span>
+                                </div>
+                                {/* Key scraped data chips */}
+                                <div className="module-data-chips">
+                                    {(modulePreviewData[module.name] || []).map((chip, i) => (
+                                        <span key={i} className="module-chip" style={{ borderColor: `${modColor}30`, color: modColor }}>
+                                            <span className="module-chip-label">{chip.label}</span>
+                                            <span className="module-chip-value">{chip.value}</span>
+                                        </span>
+                                    ))}
                                 </div>
                             </div>
                         );

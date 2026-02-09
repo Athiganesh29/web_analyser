@@ -370,6 +370,38 @@
   opacity: 0.5;
 }
 
+/* ── Module Data Chips ── */
+.module-data-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+}
+
+.module-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.68rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.module-chip-label {
+  opacity: 0.55;
+  font-weight: 500;
+  color: #9898a8;
+}
+
+.module-chip-value {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
 /* ── Module Detail Panel ── */
 .module-detail-panel {
   margin-top: 1rem;
