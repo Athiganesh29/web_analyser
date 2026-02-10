@@ -5,7 +5,7 @@
 
 const fetch = require('node-fetch');
 
-const HF_API_BASE = 'https://api-inference.huggingface.co';
+const HF_API_BASE = 'https://router.huggingface.co';
 const HF_API_KEY = process.env.HF_API_KEY;
 
 // Model configurations

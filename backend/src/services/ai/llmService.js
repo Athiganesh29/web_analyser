@@ -47,7 +47,7 @@ class LLMService {
         const combinedPrompt = `${systemPrompt}\n\nTask: ${prompt}\n\nResponse:`;
         const hfModel = 'mistralai/Mistral-7B-Instruct-v0.1';
 
-        const hfResp = await fetch(`https://api-inference.huggingface.co/models/${hfModel}`, {
+        const hfResp = await fetch(`https://router.huggingface.co/models/${hfModel}`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${process.env.HF_API_KEY}`,

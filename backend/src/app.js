@@ -22,6 +22,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api', analyzeRoutes);
 app.use('/api', reportsRoutes);
+app.use('/api/competitor', require('./routes/competitor'));
 
 // Root endpoint
 app.get('/', (req, res) => {

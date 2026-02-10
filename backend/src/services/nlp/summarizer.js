@@ -6,7 +6,7 @@
 
 const fetch = require('node-fetch');
 
-const HF_API_BASE = 'https://api-inference.huggingface.co';
+const HF_API_BASE = 'https://router.huggingface.co';
 const MODEL = 'sshleifer/distilbart-cnn-12-6';
 
 /**

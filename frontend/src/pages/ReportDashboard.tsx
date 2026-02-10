@@ -282,6 +282,7 @@ export function ReportDashboard() {
     const [error, setError] = useState<string | null>(null);
     const [activeView, setActiveView] = useState('overview');
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [competitorLoading, setCompetitorLoading] = useState(false);
 
     useEffect(() => {
         if (!reportId) { setLoading(false); return; }
@@ -336,9 +337,32 @@ export function ReportDashboard() {
     const NAV_SETTINGS = [
         { id: 'ai', label: 'AI Insights', icon: Brain },
         { id: 'issues', label: 'Issues & Fixes', icon: AlertTriangle },
+        { id: 'competitor', label: 'Competitor Analysis', icon: Target },
     ];
 
     const handleNav = (id: string) => { setActiveView(id); setSidebarOpen(false); };
+
+    // Competitor Analysis Handler
+    const handleCompetitorAnalysis = async () => {
+        if (!reportId) return;
+        setCompetitorLoading(true);
+        try {
+            const response = await fetch('http://localhost:4000/api/competitor/analyze-3-1', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userReportId: reportId })
+            });
+            const data = await response.json();
+            if (data.comparisonId) {
+                navigate(`/competitor/${data.comparisonId}`);
+            }
+        } catch (error) {
+            console.error('Competitor analysis failed:', error);
+            alert('Failed to start competitor analysis. Please try again.');
+        } finally {
+            setCompetitorLoading(false);
+        }
+    };
 
     return (
         <div className="rd">
@@ -1389,6 +1413,94 @@ export function ReportDashboard() {
                         )}
                     </div>
                 )}
+
+                {/* ═══════ COMPETITOR ANALYSIS VIEW ═══════ */}
+                {activeView === 'competitor' && (
+                    <div className="rd-view">
+                        <motion.div
+                            className="rd-card"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                        >
+                            <div className="rd-card-header">
+                                <h3><Target size={16} style={{ color: '#a78bfa' }} /> Competitor Analysis (3:1 Ratio)</h3>
+                                <span className="rd-card-badge">AI-Powered</span>
+                            </div>
+
+                            <div style={{ padding: '2rem', textAlign: 'center' }}>
+                                <div style={{
+                                    width: '80px',
+                                    height: '80px',
+                                    margin: '0 auto 1.5rem',
+                                    background: 'linear-gradient(135deg, #aee92b 0%, #9ad424 100%)',
+                                    borderRadius: '50%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontSize: '2rem',
+                                    boxShadow: '0 0 30px rgba(174, 233, 43, 0.4)'
+                                }}>
+                                    🏆
+                                </div>
+
+                                <h2 style={{ marginBottom: '1rem', color: '#fff' }}>
+                                    Compare Against 3 Top Competitors
+                                </h2>
+
+                                <p style={{
+                                    color: '#9aa0a6',
+                                    marginBottom: '2rem',
+                                    maxWidth: '600px',
+                                    margin: '0 auto 2rem',
+                                    lineHeight: '1.6'
+                                }}>
+                                    Our AI will automatically discover your top 3 competitors, analyze their websites in parallel,
+                                    and generate a comprehensive comparison report with strategic insights, quick wins, and competitive opportunities.
+                                </p>
+
+                                <button
+                                    onClick={handleCompetitorAnalysis}
+                                    disabled={competitorLoading}
+                                    style={{
+                                        padding: '1rem 2.5rem',
+                                        fontSize: '1rem',
+                                        fontWeight: '600',
+                                        background: competitorLoading ? '#555' : 'linear-gradient(135deg, #aee92b 0%, #9ad424 100%)',
+                                        color: competitorLoading ? '#fff' : '#0a0a0a',
+                                        border: 'none',
+                                        borderRadius: '8px',
+                                        cursor: competitorLoading ? 'not-allowed' : 'pointer',
+                                        transition: 'all 0.3s',
+                                        boxShadow: competitorLoading ? 'none' : '0 4px 20px rgba(174, 233, 43, 0.5)',
+                                        transform: 'scale(1)',
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        if (!competitorLoading) {
+                                            e.currentTarget.style.transform = 'scale(1.05)';
+                                            e.currentTarget.style.boxShadow = '0 6px 30px rgba(174, 233, 43, 0.7)';
+                                        }
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.transform = 'scale(1)';
+                                        e.currentTarget.style.boxShadow = competitorLoading ? 'none' : '0 4px 20px rgba(174, 233, 43, 0.5)';
+                                    }}
+                                >
+                                    {competitorLoading ? '🔄 Analyzing...' : '🚀 Start 3:1 Analysis'}
+                                </button>
+
+                                <p style={{
+                                    marginTop: '1.5rem',
+                                    fontSize: '0.85rem',
+                                    color: '#666'
+                                }}>
+                                    ⏱️ Analysis takes 30-60 seconds
+                                </p>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+
             </main>
         </div>
     );

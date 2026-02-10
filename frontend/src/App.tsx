@@ -5,9 +5,10 @@ import { LandingPage } from './pages/LandingPage';
 import AnalyzerRedirect from './pages/AnalyzerRedirect';
 import { AnalyzerDashboard } from './pages/AnalyzerDashboard';
 import { ReportDashboard } from './pages/ReportDashboard';
+import { CompetitorDashboard } from './pages/CompetitorDashboard';
 import './App.css';
 
-const FULLSCREEN_ROUTES = ['/analyze', '/dashboard', '/report'];
+const FULLSCREEN_ROUTES = ['/analyze', '/dashboard', '/report', '/competitor'];
 
 function AppLayout() {
   const location = useLocation();
@@ -19,6 +20,7 @@ function AppLayout() {
         <Route path="/analyze" element={<AnalyzerRedirect />} />
         <Route path="/dashboard/:reportId" element={<AnalyzerDashboard />} />
         <Route path="/report/:reportId" element={<ReportDashboard />} />
+        <Route path="/competitor/:comparisonId" element={<CompetitorDashboard />} />
       </Routes>
     );
   }
