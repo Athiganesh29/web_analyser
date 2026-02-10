@@ -8,6 +8,7 @@ import {
     ChevronRight, MessageSquareCode, Lightbulb, Workflow
 } from 'lucide-react';
 import PixelBlast from '../components/PixelBlast';
+import Chatbot from '../components/Chatbot';
 import './LandingPage.css';
 
 export function LandingPage() {
@@ -193,23 +194,6 @@ export function LandingPage() {
                         </button>
                     </form>
 
-                    {/* Device Mode Toggle */}
-                    <div className="device-toggle">
-                        <button
-                            className={`device-toggle-btn ${deviceMode === 'desktop' ? 'active' : ''}`}
-                            onClick={() => setDeviceMode('desktop')}
-                            type="button"
-                        >
-                            <Globe size={14} /> Desktop
-                        </button>
-                        <button
-                            className={`device-toggle-btn ${deviceMode === 'mobile' ? 'active' : ''}`}
-                            onClick={() => setDeviceMode('mobile')}
-                            type="button"
-                        >
-                            <Smartphone size={14} /> Mobile
-                        </button>
-                    </div>
 
                     <p className="hero-trust">
                         <Shield size={14} />
@@ -307,6 +291,7 @@ export function LandingPage() {
                     </form>
                 </div>
             </section>
+            <Chatbot />
         </div>
     );
 }

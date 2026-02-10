@@ -8,7 +8,9 @@ import {
     Brain, Target, Compass
 } from 'lucide-react';
 import { getReport, type Report } from '../services/api';
+import Chatbot from '../components/Chatbot';
 import Loader from '../components/Loader';
+import logo from '../assets/logo.png';
 import './AnalyzerDashboard.css';
 
 // ─── Grade Table ───
@@ -180,43 +182,40 @@ export function AnalyzerDashboard() {
 
     return (
         <div className="dashboard">
-            <div className="container dashboard-container">
-                {/* ── Logo (top-right) ── */}
-                <Link to="/" className="dash-logo">
-                    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
-                        <rect width="36" height="36" rx="8" fill="#aee92b" />
-                        <path d="M10 26L18 10L26 26" stroke="#0a0a0f" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
-                        <circle cx="18" cy="16.5" r="2.2" fill="#0a0a0f" />
-                        <path d="M13 22H23" stroke="#0a0a0f" strokeWidth="2.2" strokeLinecap="round" />
-                    </svg>
-                    <span className="dash-logo-text">
-                        <span className="dash-logo-ai">AI</span>
-                        <span className="dash-logo-name">Web Analyser</span>
-                    </span>
-                </Link>
+            {/* ═══════ NAVBAR ═══════ */}
+            <nav className="analyzer-navbar">
+                <div className="analyzer-navbar-container">
+                    {/* Logo */}
+                    <Link to="/" className="analyzer-nav-logo">
+                        <img src={logo} alt="Web Analyzer" className="analyzer-nav-logo-img" />
+                    </Link>
 
-                {/* ── Header ── */}
-                <div className="dashboard-header">
-                    <div className="dashboard-header-left">
-                        <button className="back-btn" onClick={() => navigate('/')}>
-                            <ArrowLeft size={18} />
-                            <span>Back</span>
-                        </button>
-                        <div className="dashboard-header-info">
-                            <h1 className="dashboard-title">
-                                <Shield size={22} className="title-icon" />
-                                Website Audit Report
-                            </h1>
-                            <p className="dashboard-url">
-                                <Globe size={14} />
-                                <span>{report.final_url || report.url}</span>
-                            </p>
+                    {/* Center - URL Info */}
+                    <div className="analyzer-nav-center">
+                        <div className="analyzer-nav-url-badge">
+                            <Globe size={14} />
+                            <span>{report.final_url || report.url}</span>
                         </div>
                     </div>
-                    <div className="dashboard-actions">
-                        <button className="btn btn-outline" onClick={() => navigate('/')}>New Scan</button>
+
+                    {/* Right - Actions */}
+                    <div className="analyzer-nav-actions">
+                        <button className="analyzer-nav-btn analyzer-nav-btn-outline" onClick={() => navigate('/')}>
+                            <ArrowLeft size={16} />
+                            <span>New Scan</span>
+                        </button>
+                        <button className="analyzer-nav-btn analyzer-nav-btn-primary" onClick={() => window.print()}>
+                            <Shield size={16} />
+                            <span>Export Report</span>
+                        </button>
                     </div>
                 </div>
+            </nav>
+
+
+
+            <div className="container dashboard-container">
+
 
                 {/* ── Grade Hero ── */}
                 <div className="grade-hero">
@@ -231,7 +230,7 @@ export function AnalyzerDashboard() {
                     <div className="grade-hero-details">
                         <span className="grade-hero-eyebrow">Overall Health Score</span>
                         <div className="grade-hero-score-row">
-                            <span className="grade-hero-score">{overallScore}</span>
+                            <span className="grade-hero-score" style={{ color: '#aee92b' }}>{overallScore}</span>
                             <span className="grade-hero-max">/ 100</span>
                             <span className="grade-hero-tag" style={{ backgroundColor: `${overallMeta?.color}18`, color: overallMeta?.color, borderColor: `${overallMeta?.color}40` }}>
                                 <TrendingUp size={12} />
@@ -246,7 +245,6 @@ export function AnalyzerDashboard() {
                 {report.ai_insights && (
                     <div className="ai-insights-section">
                         <div className="dash-section-header">
-                            <span className="dash-section-label" style={{ color: '#a78bfa', borderColor: 'rgba(167,139,250,0.2)', backgroundColor: 'rgba(167,139,250,0.06)' }}>AI Analysis</span>
                             <h2 className="dash-section-title">Strategic <span className="accent">Analysis</span></h2>
                             <p className="dash-section-subtitle">AI-generated roadmap for maximum impact and ROI</p>
                         </div>
@@ -930,6 +928,8 @@ export function AnalyzerDashboard() {
                     </button>
                 </div>
             </div>
+            {/* Chatbot - Fixed Position */}
+            <Chatbot reportId={reportId} report={report} />
         </div>
     );
 }

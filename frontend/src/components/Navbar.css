@@ -95,20 +95,42 @@
     margin-top: 0.15rem;
 }
 
+/* Logo Image Styling */
+.logo-image {
+    height: 96px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(174, 233, 43, 0.2));
+    transition: filter 0.2s, transform 0.2s;
+}
+
+.logo:hover .logo-image {
+    filter: drop-shadow(0 0 14px rgba(174, 233, 43, 0.4));
+    transform: scale(1.02);
+}
+
 @media (max-width: 480px) {
+    .logo-image {
+        height: 72px;
+    }
+
     .logo-svg {
         width: 2rem;
         height: 2rem;
     }
+
     .logo-ai {
         font-size: 1.1rem;
     }
+
     .logo-mid {
         font-size: 1rem;
     }
+
     .logo-tagline {
         display: none;
     }
+
     .logo-sep {
         height: 0.85rem;
     }
@@ -164,8 +186,13 @@
     left: 0;
 }
 
-.hamburger::before { top: -7px; }
-.hamburger::after  { top: 7px; }
+.hamburger::before {
+    top: -7px;
+}
+
+.hamburger::after {
+    top: 7px;
+}
 
 .hamburger.open {
     background-color: transparent;
@@ -265,15 +292,22 @@
     border: 1px solid #2a2a3a;
     border-radius: 0.5rem;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4),
-                0 4px 6px -2px rgba(0, 0, 0, 0.2);
+        0 4px 6px -2px rgba(0, 0, 0, 0.2);
     padding: 0.35rem 0;
     z-index: 100;
     animation: dropIn 0.15s ease-out;
 }
 
 @keyframes dropIn {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .dropdown-item {

@@ -1,6 +1,193 @@
+/* === Analyzer Navbar === */
+.analyzer-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(5, 5, 8, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.75rem 0;
+  animation: navSlideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes navSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.analyzer-navbar-container {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* Logo */
+.analyzer-nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  flex-shrink: 0;
+}
+
+.analyzer-nav-logo:hover {
+  opacity: 0.85;
+}
+
+.analyzer-nav-logo-text {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.analyzer-nav-logo-ai {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #aee92b;
+  background: rgba(174, 233, 43, 0.1);
+  border: 1px solid rgba(174, 233, 43, 0.25);
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.3rem;
+  letter-spacing: 0.06em;
+}
+
+.analyzer-nav-logo-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #e0e0ea;
+  letter-spacing: -0.01em;
+}
+
+/* Logo Image */
+.analyzer-nav-logo-img {
+  height: 96px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(174, 233, 43, 0.15));
+  transition: filter 0.2s, transform 0.2s;
+}
+
+.analyzer-nav-logo:hover .analyzer-nav-logo-img {
+  filter: drop-shadow(0 0 12px rgba(174, 233, 43, 0.3));
+  transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .analyzer-nav-logo-img {
+    height: 72px;
+  }
+}
+
+/* Center - URL Badge */
+.analyzer-nav-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.analyzer-nav-url-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  color: #9a9ab0;
+  font-size: 0.78rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  max-width: 100%;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.analyzer-nav-url-badge span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Actions */
+.analyzer-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.analyzer-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  border: 1px solid;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.analyzer-nav-btn-outline {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #c0c0d0;
+}
+
+.analyzer-nav-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(174, 233, 43, 0.3);
+  color: #aee92b;
+  transform: translateY(-1px);
+}
+
+.analyzer-nav-btn-primary {
+  background: rgba(174, 233, 43, 0.08);
+  border-color: rgba(174, 233, 43, 0.3);
+  color: #aee92b;
+}
+
+.analyzer-nav-btn-primary:hover {
+  background: #aee92b;
+  border-color: #aee92b;
+  color: #0a0a0f;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(174, 233, 43, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .analyzer-nav-center {
+    display: none;
+  }
+
+  .analyzer-nav-btn span {
+    display: none;
+  }
+
+  .analyzer-nav-btn {
+    padding: 0.5rem;
+  }
+}
+
 /* === Dashboard Layout === */
 .dashboard {
-  padding: 2.5rem 0 5rem;
+  padding: 0 0 5rem;
   min-height: calc(100vh - 4rem);
   position: relative;
   background: #050508;
@@ -8,8 +195,7 @@
 
 .dashboard-container {
   max-width: 72rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding: 2.5rem 1.5rem 0;
 }
 
 @media (min-width: 768px) {

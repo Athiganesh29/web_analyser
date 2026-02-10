@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
     Menu, X, Home, Zap, Search, Smartphone, FileText,
-    TrendingUp, Globe, AlertTriangle, CheckCircle, XCircle,
+    TrendingUp, AlertTriangle, CheckCircle, XCircle,
     Info, Brain, Target, ArrowLeft, Printer,
     ChevronRight, Shield, BarChart3
 } from 'lucide-react';
@@ -10,6 +10,8 @@ import { motion, useInView, useSpring, useTransform } from 'framer-motion';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadialBarChart, RadialBar, AreaChart, Area } from 'recharts';
 import { getReport, type Report } from '../services/api';
 import Loader from '../components/Loader';
+import Chatbot from '../components/Chatbot';
+import logo from '../assets/logo.png';
 import './ReportDashboard.css';
 
 /* ─── Grade helpers ─── */
@@ -346,7 +348,7 @@ export function ReportDashboard() {
             <aside className={`rd-sidebar ${sidebarOpen ? 'rd-sidebar--open' : ''}`}>
                 <div className="rd-sb-top">
                     <div className="rd-sb-brand">
-                        <div className="rd-sb-logo"><Globe size={18} /></div>
+                        <img src={logo} alt="Web Analyzer" className="rd-sb-logo-img" />
                         <span className="rd-sb-name">Web Analyzer</span>
                         <button className="rd-sb-close" onClick={() => setSidebarOpen(false)}><X size={18} /></button>
                     </div>
@@ -1390,6 +1392,7 @@ export function ReportDashboard() {
                     </div>
                 )}
             </main>
+            <Chatbot reportId={reportId} report={report} />
         </div>
     );
 }

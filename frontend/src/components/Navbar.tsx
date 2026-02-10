@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { User, ChevronDown, MessageSquare } from 'lucide-react';
+import logo from '../assets/logo.png';
 import './Navbar.css';
 
 interface DropdownItem {
@@ -80,21 +81,7 @@ export function Navbar() {
             <div className="header-top">
                 <div className="container header-top-inner">
                     <Link to="/" className="logo">
-                        <span className="logo-icon">
-                            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="logo-svg">
-                                <rect width="36" height="36" rx="8" fill="#aee92b"/>
-                                <path d="M10 26L18 10L26 26" stroke="#0a0a0f" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round"/>
-                                <circle cx="18" cy="16.5" r="2.2" fill="#0a0a0f"/>
-                                <path d="M13 22H23" stroke="#0a0a0f" strokeWidth="2.2" strokeLinecap="round"/>
-                            </svg>
-                        </span>
-                        <span className="logo-text">
-                            <span className="logo-top">
-                                <span className="logo-ai">AI</span>
-                                <span className="logo-sep"></span>
-                                <span className="logo-mid">Web Analyser</span>
-                            </span>
-                        </span>
+                        <img src={logo} alt="Web Analyzer" className="logo-image" />
                     </Link>
                     <div className="header-right">
                         <Link to="/signin" className="signin-link">
@@ -120,54 +107,54 @@ export function Navbar() {
                 <>
                     <div className="header-divider" />
                     <nav className={`header-nav ${mobileMenuOpen ? 'mobile-open' : ''}`}>
-                <div className="container header-nav-inner">
-                    <div className="nav-items">
-                        {/* Dropdown nav items */}
-                        {dropdownMenus.map(menu => (
-                            <div className="nav-dropdown-wrapper" key={menu.label}>
-                                <button
-                                    className={`nav-item nav-item-dropdown ${openDropdown === menu.label ? 'active' : ''}`}
-                                    onClick={() => toggleDropdown(menu.label)}
-                                >
-                                    <span className="nav-item-icon">{menu.icon}</span>
-                                    <span>{menu.label}</span>
-                                    <ChevronDown
-                                        size={14}
-                                        className={`chevron ${openDropdown === menu.label ? 'rotated' : ''}`}
-                                    />
-                                </button>
-                                {openDropdown === menu.label && (
-                                    <div className="dropdown-menu">
-                                        {menu.items.map(item => (
-                                            <Link
-                                                key={item.href}
-                                                to={item.href}
-                                                className="dropdown-item"
-                                                onClick={() => {
-                                                    setOpenDropdown(null);
-                                                    setMobileMenuOpen(false);
-                                                }}
-                                            >
-                                                {item.label}
-                                            </Link>
-                                        ))}
+                        <div className="container header-nav-inner">
+                            <div className="nav-items">
+                                {/* Dropdown nav items */}
+                                {dropdownMenus.map(menu => (
+                                    <div className="nav-dropdown-wrapper" key={menu.label}>
+                                        <button
+                                            className={`nav-item nav-item-dropdown ${openDropdown === menu.label ? 'active' : ''}`}
+                                            onClick={() => toggleDropdown(menu.label)}
+                                        >
+                                            <span className="nav-item-icon">{menu.icon}</span>
+                                            <span>{menu.label}</span>
+                                            <ChevronDown
+                                                size={14}
+                                                className={`chevron ${openDropdown === menu.label ? 'rotated' : ''}`}
+                                            />
+                                        </button>
+                                        {openDropdown === menu.label && (
+                                            <div className="dropdown-menu">
+                                                {menu.items.map(item => (
+                                                    <Link
+                                                        key={item.href}
+                                                        to={item.href}
+                                                        className="dropdown-item"
+                                                        onClick={() => {
+                                                            setOpenDropdown(null);
+                                                            setMobileMenuOpen(false);
+                                                        }}
+                                                    >
+                                                        {item.label}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
-                                )}
+                                ))}
                             </div>
-                        ))}
-                    </div>
 
-                    {/* Contact Us button */}
-                    <Link
-                        to="/contact"
-                        className="contact-btn"
-                        onClick={() => setMobileMenuOpen(false)}
-                    >
-                        <MessageSquare size={16} />
-                        <span>Contact Us</span>
-                    </Link>
-                </div>
-            </nav>
+                            {/* Contact Us button */}
+                            <Link
+                                to="/contact"
+                                className="contact-btn"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                <MessageSquare size={16} />
+                                <span>Contact Us</span>
+                            </Link>
+                        </div>
+                    </nav>
                 </>
             )}
         </header>

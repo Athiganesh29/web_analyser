@@ -76,6 +76,13 @@
     color: var(--rd-accent);
 }
 
+.rd-sb-logo-img {
+    height: 64px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 4px rgba(174, 233, 43, 0.2));
+}
+
 .rd-sb-name {
     font-size: 0.92rem;
     font-weight: 700;
