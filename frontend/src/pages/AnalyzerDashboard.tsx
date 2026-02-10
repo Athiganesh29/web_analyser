@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { getReport, type Report } from '../services/api';
 import Loader from '../components/Loader';
+import Chatbot from '../components/Chatbot';
 import './AnalyzerDashboard.css';
 
 // ─── Grade Table ───
@@ -540,6 +541,8 @@ export function AnalyzerDashboard() {
                     </button>
                 </div>
             </div>
+            {/* ── AI Chatbot ── */}
+            {reportId && <Chatbot reportId={reportId} report={report} />}
         </div>
     );
 }

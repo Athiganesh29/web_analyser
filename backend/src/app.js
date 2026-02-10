@@ -3,6 +3,7 @@ const cors = require('cors');
 const connectDB = require('./db/connection');
 const analyzeRoutes = require('./routes/analyze');
 const reportsRoutes = require('./routes/reports');
+const chatRoutes = require('./routes/chat');
 require('dotenv').config();
 
 const app = express();
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api', analyzeRoutes);
 app.use('/api', reportsRoutes);
+app.use('/api', chatRoutes);
 
 // Root endpoint
 app.get('/', (req, res) => {
@@ -60,7 +62,7 @@ const startServer = async () => {
   try {
     // Connect to MongoDB
     await connectDB();
-    
+
     // Start Express server
     app.listen(PORT, () => {
       console.log(`🚀 Server running on http://localhost:${PORT}`);

@@ -4,6 +4,7 @@ import { Footer } from './components/Footer';
 import { LandingPage } from './pages/LandingPage';
 import AnalyzerRedirect from './pages/AnalyzerRedirect';
 import { AnalyzerDashboard } from './pages/AnalyzerDashboard';
+import Chatbot from './components/Chatbot';
 import './App.css';
 
 const FULLSCREEN_ROUTES = ['/analyze', '/dashboard'];
@@ -34,6 +35,7 @@ function AppLayout() {
         </Routes>
       </main>
       <Footer />
+      <Chatbot />
     </div>
   );
 }
